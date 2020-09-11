@@ -1,0 +1,17 @@
+/*
+    Tutorial Link:   https://www.youtube.com/watch?v=jK0l2s5R1tM
+*/
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+
+    font-family: sans-serif;
+}
+
+#canvas {
+    background: rgb(53, 53, 53);
+    z-index: -1;
+}

@@ -1,0 +1,38 @@
+<!--
+    Tutorial Link:   https://www.youtube.com/watch?v=jK0l2s5R1tM
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proximity Graphs with Gravity</title>
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <script defer src="scripts/vector.js"></script>
+    <script defer src="scripts/functions.js"></script>
+    <script defer src="scripts/canvas-drawing-functions.js"></script>
+    <script defer src="scripts/script.js"></script>
+</head>
+
+<body>
+    <!-- Canvas -->
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas')
+        let width, height
+        document.body.onresize = resizeCanvas
+        resizeCanvas()
+
+        function resizeCanvas() {
+            width = canvas.width = document.body.offsetWidth
+            height = canvas.height = document.body.offsetHeight
+        }
+    </script>
+</body>
+
+</html>
