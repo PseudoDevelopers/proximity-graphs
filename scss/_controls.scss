@@ -1,0 +1,11 @@
+#controls {    
+    display: flex;
+
+    font-size: 20px;
+}
+
+#controls > *:not(:last-child) {
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #00000055;
+}

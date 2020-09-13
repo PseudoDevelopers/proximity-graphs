@@ -1,0 +1,60 @@
+#nodes {
+    .container {
+        .btns-and-number-container {
+            display: flex;
+
+            .btns {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                
+                button {
+                    cursor: pointer;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    border-radius: $round-corners;
+                    font-size: 20px;
+    
+                    &:hover {
+                        background: $light-gb;
+                    }
+                }
+            }
+        }
+
+        #no-of-nodes {
+            display: block;
+            font-size: 40px;
+        }
+        span {
+            font-size: 30px;
+        }
+    }
+}
+
+// Media Buttons
+#media-btns {
+    display: flex;
+    justify-content: space-evenly;
+
+    span {
+        margin: 0 3px;
+        cursor: pointer;
+        border-radius: $round-corners;
+
+        &:hover {
+            background: #FFFFFF55;
+        }
+    }
+
+    /* Play Pause icon show hide */
+    .play-pause {
+        #play { display: none; }
+
+        &[paused='true'] {
+            #play/***/ { display: initial;/**/ }
+            #pause/**/ { display: none;/*****/ }
+        }
+    }
+}

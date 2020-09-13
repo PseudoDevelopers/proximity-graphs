@@ -1,5 +1,3 @@
-// Tutorial Link:   https://www.youtube.com/watch?v=jK0l2s5R1tM
-
 function drawLine(p1, p2, clr) {
     ctx.strokeStyle = clr
     ctx.beginPath()

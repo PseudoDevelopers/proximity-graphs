@@ -1,0 +1,9 @@
+.chk-boxes input[type="checkbox"] {
+    margin-left: 0;
+    border: 2px dotted #00f;
+    background: #ff0000;
+}
+
+.chk-boxs *, .radio-btns * {
+    cursor: pointer;
+}

@@ -1,0 +1,42 @@
+#controls-panel {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 2px 20px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #FFFFFF44;
+
+    overflow: hidden;
+}
+
+#hide-show-icons {
+    margin-left: calc(100% - 10px);
+    margin-bottom: 10px;
+}
+#minimize-icon, #maximize-icon {
+    padding: 2px;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+#minimize-icon:hover, #maximize-icon:hover {
+    background: #FFFFFF44;
+}
+
+
+/* #controls-panel Hide Show */
+/********************************/#controls { overflow: hidden; transition: height 0.5s; }
+#controls-panel[minimized='true'] #controls { height: 0;/******************************/ }
+
+
+/* Minimized */
+#controls-panel[minimized='true'] #hide-show-icons { margin-bottom: 0; }
+#controls-panel[minimized='true'] #minimize-icon { display: none;/*****/; }
+#controls-panel[minimized='true'] #maximize-icon { display: initial;/**/ }
+
+/* Maximized */
+#controls-panel[minimized='false'] #minimize-icon { display: initial;/**/ }
+#controls-panel[minimized='false'] #maximize-icon { display: none;/*****/ }

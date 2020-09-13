@@ -1,5 +1,3 @@
-// Tutorial Link:   https://www.youtube.com/watch?v=jK0l2s5R1tM
-
 const MAX_DISTANCE_FOR_CONNECTION = 200
 const MIN_DISTANCE_FOR_MAX_ALPHA = 50
 const CANVAS_MIDDLE = V(width / 2, height / 2)
@@ -32,7 +30,7 @@ function frame(Δt) {
 function draw() {
     clearCanvas()
 
-    drawConnections()
+    if (lines) drawConnections()
     for (let node of nodes)
         node.draw()
 }
@@ -65,7 +63,7 @@ function drawConnection(node1, node2) {
 }
 
 function createNodes() {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < noOfNodes; i++) {
         let node = createNode()
         node.position.randomize(lerp(0, width / 2, Math.random())).add(CANVAS_MIDDLE)
         node.velocity.randomize(lerp(0.05, 0.2, Math.random()))

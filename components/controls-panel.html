@@ -1,0 +1,33 @@
+<div id="controls-panel" minimized="false">
+    <div id="hide-show-icons">
+        <span id="minimize-icon" title="Minimize" onclick="showPanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
+        <span id="maximize-icon" title="Maximize" onclick="showPanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    </div>
+
+    <script>
+        const CONTROL_PANEL = document.getElementById('controls-panel')
+        function showPanel(value) {
+            CONTROL_PANEL.setAttribute('minimized', value)
+        }
+    </script>
+
+    <div id="controls">
+        <script> include('components/controls/nodes.html', document.currentScript) </script>
+
+        <div class="chk-boxs">
+            <div>
+                <input type="checkbox" id="gravity" onchange="gravity=this.checked" checked>
+                <label for="gravity">Gravity</label>
+            </div>
+
+            <div>
+                <input type="checkbox" id="lines" onchange="lines=this.checked" checked>
+                <label for="lines">Connections</label>
+            </div>
+        </div>
+
+        <script> include('components/controls/edges.html', document.currentScript) </script>
+        
+        <script> include('components/controls/nodes-nature.html', document.currentScript) </script>
+    </div>
+</div>
