@@ -12,8 +12,6 @@
     <script defer src="assets/scripts/functions.js"></script>
     <script defer src="assets/scripts/canvas-drawing-functions.js"></script>
     <script defer src="assets/scripts/script.js"></script>
-
-    <script src="assets/scripts/include.js"></script>
 </head>
 
 <body>
@@ -38,7 +36,66 @@
     </script>
 
     <!-- Controls Panel -->
-    <script> include('components/controls-panel.html', document.currentScript) </script>
+    <div id="controls-panel" minimized="false">
+    <div id="hide-show-icons">
+        <span id="minimize-icon" title="Minimize" onclick="showPanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
+        <span id="maximize-icon" title="Maximize" onclick="showPanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    </div>
+
+    <script>
+        const CONTROL_PANEL = document.getElementById('controls-panel')
+        function showPanel(value) {
+            CONTROL_PANEL.setAttribute('minimized', value)
+        }
+    </script>
+
+    <div id="controls">
+        <script> include('components/controls/nodes.html', document.currentScript) </script>
+
+        <div class="chk-boxs">
+            <div>
+                <input type="checkbox" id="gravity" onchange="gravity=this.checked" checked>
+                <label for="gravity">Gravity</label>
+            </div>
+
+            <div>
+                <input type="checkbox" id="lines" onchange="lines=this.checked" checked>
+                <label for="lines">Connections</label>
+            </div>
+        </div>
+
+        <div class="radio-btns" id="edge">
+    <div>
+        <input type="radio" name="edge" id="edge-bounce" checked>
+        <label for="edge-bounce">Bounce</label>
+    </div>
+
+    <div>
+        <input type="radio" name="edge" id="torus">
+        <label for="torus">Torus</label>
+    </div>
+
+    <div>
+        <input type="radio" name="edge" id="edge-none">
+        <label for="edge-none">None</label>
+    </div>
+</div>
+
+        
+        <div class="radio-btns" id="nodes-nature">
+    <div>
+        <input type="radio" name="nodes-nature" id="transparent-nodes" checked>
+        <label for="transparent-nodes">Transparent</label>
+    </div>
+    <div>
+        <input type="radio" name="nodes-nature" id="solid-nodes">
+        <label for="solid-nodes">Collide</label>
+    </div>
+</div>
+
+    </div>
+</div>
+
 </body>
 
 </html>

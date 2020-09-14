@@ -22,7 +22,7 @@
     <!-- Media Buttons -->
     <div id="media-btns">
         <span id="fast-forward" title="Fast forward">&#x23EE;</span>
-        <div class="play-pause" paused="false" onclick="playPause(this)">
+        <div class="play-pause" id="play-pause" paused="false" onclick="playPause()">
             <span id="play" title="Play">&#x23F5;</span>
             <span id="pause" title="Pause">&#x23F8;</span>
         </div>
@@ -30,14 +30,26 @@
     </div>
 
     <script>
-        function playPause(elem) {
-            const isPaused = elem.getAttribute('paused')
+        let paused = false
+        
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 32) {
+                playPause()
+            }
+        })
+ 
+        const PLAY_PAUSE_ELEM = document.getElementById('play-pause')
+        function playPause() {
+            paused = !paused
+            
+            const isPaused = PLAY_PAUSE_ELEM.getAttribute('paused')
 
-            if (isPaused === 'true') {
-                elem.setAttribute('paused', 'false')
+            if (paused) {
+                PLAY_PAUSE_ELEM.setAttribute('paused', 'true')
             }
             else {
-                elem.setAttribute('paused', 'true')
+                PLAY_PAUSE_ELEM.setAttribute('paused', 'false')
+                startAnimation()
             }
         }
     </script>
