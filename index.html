@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="assets/styles/index.min.css">
 
+    <script src="assets/scripts/accessories.js"></script>
+
     <script defer src="assets/scripts/vector.js"></script>
     <script defer src="assets/scripts/functions.js"></script>
     <script defer src="assets/scripts/node.js"></script>
@@ -37,24 +39,37 @@
     </script>
 
     <!-- Controls Panel -->
-    <div id="controls-panel" minimized="true">
+    <section id="controls-panel" minimized="true">
     <script>
-        setTimeout(() => hidePanel('false'), 2000)
+        setTimeout(() => CONTROL_PANEL.show(), 2000)
     </script>
 
-    <div id="hide-show-icons">
-        <span id="minimize-icon" title="Minimize" onclick="hidePanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
-        <span id="maximize-icon" title="Maximize" onclick="hidePanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    <div class="icons">
+        <span class="minimize" title="Minimize" onclick="CONTROL_PANEL.hide()">&#128469;&#xFE0E;</span>     <!-- Minimize -->
+        <span class="maximize" title="Maximize" onclick="CONTROL_PANEL.show()">&#128470;&#xFE0E;</span>     <!-- Maximize -->
     </div>
-    
+
     <script>
-        const CONTROL_PANEL = document.getElementById('controls-panel')
-        function hidePanel(value) {
-            CONTROL_PANEL.setAttribute('minimized', value)
+        const CONTROL_PANEL = {
+            elem: document.getElementById('controls-panel'),
+            isShow()/****/ { return this.elem.getAttribute('minimized') === 'false'/**/ },
+            isHidden()/**/ { return this.elem.getAttribute('minimized') === 'true'/***/ },
+            show()/******/ { this.elem.setAttribute('minimized', 'false')/**/ },
+            hide()/******/ { this.elem.setAttribute('minimized', 'true')/***/ },
+            toggle() {
+                if (this.isShow()) this.hide()
+                else/************/ this.show()
+            }
         }
+
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 27)
+                CONTROL_PANEL.toggle()
+        })
     </script>
 
     <div id="controls">
+        <!-- Nodes -->
         <section id="nodes">
     <div class="container">
         <div class="btns-and-number-container">
@@ -78,12 +93,12 @@
 
     <!-- Media Buttons -->
     <div id="media-btns">
-        <span id="fast-forward" title="Fast forward" onclick="prevFrame()">&#x23EE;</span>
+        <span title="Previous Frame" onclick="prevFrame()">&#x23EE;</span>
         <div class="play-pause" id="play-pause" paused="false">
             <span id="play" title="Play" onclick="play()">&#x23F5;</span>
             <span id="pause" title="Pause" onclick="pause()">&#x23F8;</span>
         </div>
-        <span id="fast-rewind" title="Fast rewind" onclick="nextFrame()">&#x23ED;</span>
+        <span title="Next Frame" onclick="nextFrame()">&#x23ED;</span>
     </div>
 
     <script>
@@ -133,20 +148,21 @@
 </section>
 
 
-        <div class="chk-boxs">
-            <div>
-                <input type="checkbox" id="gravity" onchange="gravity=this.checked" checked>
-                <label for="gravity">Gravity</label>
-            </div>
+        <!-- Nodes Nature -->
+        <section class="radio-btns" id="nodes-nature">
+    <div>
+        <input type="radio" name="nodes-nature" id="transparent-nodes" checked>
+        <label for="transparent-nodes">Transparent</label>
+    </div>
+    <div>
+        <input type="radio" name="nodes-nature" id="solid-nodes">
+        <label for="solid-nodes">Collide</label>
+    </div>
+</section>
 
-            <div>
-                <input type="checkbox" id="lines" onchange="lines=this.checked" checked>
-                <label for="lines">Connections</label>
-            </div>
-        </div>
 
         <!-- Edges -->
-        <div class="radio-btns" id="edge">
+        <section class="radio-btns" id="edge">
     <div>
         <input type="radio" name="edge" id="edge-bounce" checked>
         <label for="edge-bounce">Bounce</label>
@@ -161,23 +177,24 @@
         <input type="radio" name="edge" id="edge-none">
         <label for="edge-none">None</label>
     </div>
-</div>
+</section>
 
 
-        <!-- Nodes Nature -->
-        <div class="radio-btns" id="nodes-nature">
+        <!-- Other Options -->
+        <div class="chk-boxs">
     <div>
-        <input type="radio" name="nodes-nature" id="transparent-nodes" checked>
-        <label for="transparent-nodes">Transparent</label>
+        <input type="checkbox" id="gravity" onchange="gravity=this.checked" checked>
+        <label for="gravity">Gravity</label>
     </div>
+
     <div>
-        <input type="radio" name="nodes-nature" id="solid-nodes">
-        <label for="solid-nodes">Collide</label>
+        <input type="checkbox" id="lines" onchange="lines=this.checked" checked>
+        <label for="lines">Connections</label>
     </div>
 </div>
 
     </div>
-</div>
+</section>
 
 </body>
 

@@ -1,39 +1,43 @@
-<div id="controls-panel" minimized="true">
+<section id="controls-panel" minimized="true">
     <script>
-        setTimeout(() => hidePanel('false'), 2000)
+        setTimeout(() => CONTROL_PANEL.show(), 2000)
     </script>
 
-    <div id="hide-show-icons">
-        <span id="minimize-icon" title="Minimize" onclick="hidePanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
-        <span id="maximize-icon" title="Maximize" onclick="hidePanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    <div class="icons">
+        <span class="minimize" title="Minimize" onclick="CONTROL_PANEL.hide()">&#128469;&#xFE0E;</span>     <!-- Minimize -->
+        <span class="maximize" title="Maximize" onclick="CONTROL_PANEL.show()">&#128470;&#xFE0E;</span>     <!-- Maximize -->
     </div>
-    
+
     <script>
-        const CONTROL_PANEL = document.getElementById('controls-panel')
-        function hidePanel(value) {
-            CONTROL_PANEL.setAttribute('minimized', value)
+        const CONTROL_PANEL = {
+            elem: document.getElementById('controls-panel'),
+            isShow()/****/ { return this.elem.getAttribute('minimized') === 'false'/**/ },
+            isHidden()/**/ { return this.elem.getAttribute('minimized') === 'true'/***/ },
+            show()/******/ { this.elem.setAttribute('minimized', 'false')/**/ },
+            hide()/******/ { this.elem.setAttribute('minimized', 'true')/***/ },
+            toggle() {
+                if (this.isShow()) this.hide()
+                else/************/ this.show()
+            }
         }
+
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 27)
+                CONTROL_PANEL.toggle()
+        })
     </script>
 
     <div id="controls">
+        <!-- Nodes -->
         @@include('controls/nodes.html')
 
-        <div class="chk-boxs">
-            <div>
-                <input type="checkbox" id="gravity" onchange="gravity=this.checked" checked>
-                <label for="gravity">Gravity</label>
-            </div>
-
-            <div>
-                <input type="checkbox" id="lines" onchange="lines=this.checked" checked>
-                <label for="lines">Connections</label>
-            </div>
-        </div>
+        <!-- Nodes Nature -->
+        @@include('controls/nodes-nature.html')
 
         <!-- Edges -->
         @@include('controls/edges.html')
 
-        <!-- Nodes Nature -->
-        @@include('controls/nodes-nature.html')
+        <!-- Other Options -->
+        @@include('controls/other-options.html')
     </div>
-</div>
+</section>
