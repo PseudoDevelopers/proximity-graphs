@@ -3,9 +3,9 @@ const fileinclude = require('gulp-file-include')
 const htmlmin = require('gulp-htmlmin')
 
 const paths = {
-    html: './html',
-    indexFile: './html/index.html',
-    dest: './'
+    html: '../html',
+    indexFile: '../html/index.html',
+    dest: '../'
 }
 
 async function updateIndexFile() {
