@@ -1,18 +1,22 @@
-<div id="controls-panel" minimized="false">
-    <div id="hide-show-icons">
-        <span id="minimize-icon" title="Minimize" onclick="showPanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
-        <span id="maximize-icon" title="Maximize" onclick="showPanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
-    </div>
+<div id="controls-panel" minimized="true">
+    <script>
+        setTimeout(() => hidePanel('false'), 2000)
+    </script>
 
+    <div id="hide-show-icons">
+        <span id="minimize-icon" title="Minimize" onclick="hidePanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
+        <span id="maximize-icon" title="Maximize" onclick="hidePanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    </div>
+    
     <script>
         const CONTROL_PANEL = document.getElementById('controls-panel')
-        function showPanel(value) {
+        function hidePanel(value) {
             CONTROL_PANEL.setAttribute('minimized', value)
         }
     </script>
 
     <div id="controls">
-        <script> include('components/controls/nodes.html', document.currentScript) </script>
+        @@include('controls/nodes.html')
 
         <div class="chk-boxs">
             <div>
@@ -26,8 +30,10 @@
             </div>
         </div>
 
+        <!-- Edges -->
         @@include('controls/edges.html')
-        
+
+        <!-- Nodes Nature -->
         @@include('controls/nodes-nature.html')
     </div>
 </div>

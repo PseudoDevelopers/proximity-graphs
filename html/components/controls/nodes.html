@@ -21,36 +21,56 @@
 
     <!-- Media Buttons -->
     <div id="media-btns">
-        <span id="fast-forward" title="Fast forward">&#x23EE;</span>
-        <div class="play-pause" id="play-pause" paused="false" onclick="playPause()">
-            <span id="play" title="Play">&#x23F5;</span>
-            <span id="pause" title="Pause">&#x23F8;</span>
+        <span id="fast-forward" title="Fast forward" onclick="prevFrame()">&#x23EE;</span>
+        <div class="play-pause" id="play-pause" paused="false">
+            <span id="play" title="Play" onclick="play()">&#x23F5;</span>
+            <span id="pause" title="Pause" onclick="pause()">&#x23F8;</span>
         </div>
-        <span id="fast-rewind" title="Fast rewind">&#x23ED;</span>
+        <span id="fast-rewind" title="Fast rewind" onclick="nextFrame()">&#x23ED;</span>
     </div>
 
     <script>
         let paused = false
-        
-        document.addEventListener('keydown', e => {
-            if (e.keyCode === 32) {
-                playPause()
-            }
-        })
- 
         const PLAY_PAUSE_ELEM = document.getElementById('play-pause')
-        function playPause() {
-            paused = !paused
-            
-            const isPaused = PLAY_PAUSE_ELEM.getAttribute('paused')
 
-            if (paused) {
-                PLAY_PAUSE_ELEM.setAttribute('paused', 'true')
-            }
-            else {
-                PLAY_PAUSE_ELEM.setAttribute('paused', 'false')
-                startAnimation()
-            }
+        document.addEventListener('keydown', e => {
+            if/***/ (e.keyCode === 32) togglePlayPause()    // Space
+            else if (e.keyCode === 37) prevFrame()          // Left Key
+            else if (e.keyCode === 39) nextFrame()          // Right Key
+        })
+    </script>
+
+    <!-- Play Pause -->
+    <script>
+        function togglePlayPause() {
+            if (paused) play()
+            else/*****/ pause()
+        }
+        function play() {
+            if (!paused) return
+
+            paused = false
+            PLAY_PAUSE_ELEM.setAttribute('paused', 'false')
+            startAnimation()
+        }
+        function pause() {
+            if (paused) return
+
+            paused = true
+            PLAY_PAUSE_ELEM.setAttribute('paused', 'true')
+            stopAnimation()
+        }
+    </script>
+
+    <!-- Next & Prev Frames -->
+    <script>
+        function nextFrame() {
+            pause()
+            playNextFrame()
+        }
+        function prevFrame() {
+            pause()
+            playPrevFrame()
         }
     </script>
 </section>

@@ -7,17 +7,20 @@ const ctx = canvas.getContext('2d')
 const nodes = []
 
 let prevTime = 0
+let requestAnimationFrameID
+const SINGLE_FRAME_TIME = 5
 
 createNodes()
-animate()
+startAnimation()
 
 function animate() {
     let now = performance.now()
     let Δt = now - prevTime
     prevTime = now
-    requestAnimationFrame(animate)
 
     frame(Δt)
+
+    if (!paused) requestAnimationFrameID = requestAnimationFrame(animate)
 }
 
 function frame(Δt) {
@@ -70,25 +73,19 @@ function createNodes() {
         nodes.push(node)
     }
 }
-function createNode() {
-    return {
-        radius: 5,
-        position: V(300, 200),
-        velocity: V(0.3, 0.4),
-        color: 'crimson',
-        move(dt) {
-            // Position = Initial position + v * Δt
-            this.position.add(this.velocity.times(dt))
-        },
-        draw() {
-            drawCircle(this.position.x, this.position.y, this.radius, this.color)
-        },
-        chkEdgeBounce() {
-            if/***/ (this.position.x >= width - this.radius) this.velocity.x *= -1     // right wall
-            else if (this.position.x <= this.radius)/******/ this.velocity.x *= -1     // left wall
 
-            if/***/ (this.position.y >= height - this.radius) this.velocity.y *= -1    // Bottom
-            else if (this.position.y <= this.radius)/*******/ this.velocity.y *= -1    // Top
-        }
-    }
+
+function startAnimation() {
+    prevTime = performance.now()
+    requestAnimationFrameID = requestAnimationFrame(animate)
+}
+function stopAnimation() {
+    cancelAnimationFrame(requestAnimationFrameID)
+}
+function playNextFrame() {
+    prevTime = performance.now() - SINGLE_FRAME_TIME
+    animate()
+}
+function playPrevFrame() {
+    // 
 }

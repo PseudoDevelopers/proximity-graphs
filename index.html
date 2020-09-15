@@ -10,6 +10,7 @@
 
     <script defer src="assets/scripts/vector.js"></script>
     <script defer src="assets/scripts/functions.js"></script>
+    <script defer src="assets/scripts/node.js"></script>
     <script defer src="assets/scripts/canvas-drawing-functions.js"></script>
     <script defer src="assets/scripts/script.js"></script>
 </head>
@@ -36,21 +37,101 @@
     </script>
 
     <!-- Controls Panel -->
-    <div id="controls-panel" minimized="false">
-    <div id="hide-show-icons">
-        <span id="minimize-icon" title="Minimize" onclick="showPanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
-        <span id="maximize-icon" title="Maximize" onclick="showPanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
-    </div>
+    <div id="controls-panel" minimized="true">
+    <script>
+        setTimeout(() => hidePanel('false'), 2000)
+    </script>
 
+    <div id="hide-show-icons">
+        <span id="minimize-icon" title="Minimize" onclick="hidePanel('true')">&#128469;&#xFE0E;</span>      <!-- Minimize -->
+        <span id="maximize-icon" title="Maximize" onclick="hidePanel('false')">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    </div>
+    
     <script>
         const CONTROL_PANEL = document.getElementById('controls-panel')
-        function showPanel(value) {
+        function hidePanel(value) {
             CONTROL_PANEL.setAttribute('minimized', value)
         }
     </script>
 
     <div id="controls">
-        <script> include('components/controls/nodes.html', document.currentScript) </script>
+        <section id="nodes">
+    <div class="container">
+        <div class="btns-and-number-container">
+            <div class="btns">
+                <button class="btn-round" title="Add one">&#x2b;</button>
+                <button class="btn-round" title="Remove one">&#8722;</button>
+            </div>
+            <span id="no-of-nodes"></span>
+        </div>
+        <span>Nodes</span>
+    </div>
+
+    <script>
+        const NO_OF_NODES_ELEM = document.getElementById('no-of-nodes')
+        updateNoOfNodes()
+        function updateNoOfNodes() {
+            NO_OF_NODES_ELEM.innerText = noOfNodes
+        }
+    </script>
+
+
+    <!-- Media Buttons -->
+    <div id="media-btns">
+        <span id="fast-forward" title="Fast forward" onclick="prevFrame()">&#x23EE;</span>
+        <div class="play-pause" id="play-pause" paused="false">
+            <span id="play" title="Play" onclick="play()">&#x23F5;</span>
+            <span id="pause" title="Pause" onclick="pause()">&#x23F8;</span>
+        </div>
+        <span id="fast-rewind" title="Fast rewind" onclick="nextFrame()">&#x23ED;</span>
+    </div>
+
+    <script>
+        let paused = false
+        const PLAY_PAUSE_ELEM = document.getElementById('play-pause')
+
+        document.addEventListener('keydown', e => {
+            if/***/ (e.keyCode === 32) togglePlayPause()    // Space
+            else if (e.keyCode === 37) prevFrame()          // Left Key
+            else if (e.keyCode === 39) nextFrame()          // Right Key
+        })
+    </script>
+
+    <!-- Play Pause -->
+    <script>
+        function togglePlayPause() {
+            if (paused) play()
+            else/*****/ pause()
+        }
+        function play() {
+            if (!paused) return
+
+            paused = false
+            PLAY_PAUSE_ELEM.setAttribute('paused', 'false')
+            startAnimation()
+        }
+        function pause() {
+            if (paused) return
+
+            paused = true
+            PLAY_PAUSE_ELEM.setAttribute('paused', 'true')
+            stopAnimation()
+        }
+    </script>
+
+    <!-- Next & Prev Frames -->
+    <script>
+        function nextFrame() {
+            pause()
+            playNextFrame()
+        }
+        function prevFrame() {
+            pause()
+            playPrevFrame()
+        }
+    </script>
+</section>
+
 
         <div class="chk-boxs">
             <div>
@@ -64,6 +145,7 @@
             </div>
         </div>
 
+        <!-- Edges -->
         <div class="radio-btns" id="edge">
     <div>
         <input type="radio" name="edge" id="edge-bounce" checked>
@@ -81,7 +163,8 @@
     </div>
 </div>
 
-        
+
+        <!-- Nodes Nature -->
         <div class="radio-btns" id="nodes-nature">
     <div>
         <input type="radio" name="nodes-nature" id="transparent-nodes" checked>
