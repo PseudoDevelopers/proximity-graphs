@@ -9,24 +9,26 @@ const nodes = []
 let prevTime = 0
 let requestAnimationFrameID
 const SINGLE_FRAME_TIME = 5
+let dt
 
 createNodes()
 startAnimation()
 
 function animate() {
     let now = performance.now()
-    let Δt = now - prevTime
+    dt = now - prevTime
     prevTime = now
+    dt = SINGLE_FRAME_TIME
 
-    frame(Δt)
+    frame()
 
     if (!paused) requestAnimationFrameID = requestAnimationFrame(animate)
 }
 
-function frame(Δt) {
+function frame() {
     nodes.forEach(node => {
         node.chkEdgeBounce()
-        node.move(Δt)
+        node.move(dt)
     })
     draw()
 }
@@ -39,39 +41,40 @@ function draw() {
 }
 
 function drawConnections() {
-    for (let i = 0; i < nodes.length; i++) {
-        let node1 = nodes[i]
-        for (let j = 0; j < nodes.length; j++) {
-            let node2 = nodes[j]
-            drawConnection(node1, node2)
-        }
-    }
+    nodes.forEach(node1 => {
+        nodes.forEach(node2 => {
+            if (node1 !== node2)
+                drawConnection(node1, node2)
+        })
+    })
 }
 function drawConnection(node1, node2) {
     let displacement = node2.position.minus(node1.position)
     let distance = displacement.norm()
-    if (distance >= 300)
-        return
+    // if (distance >= 300)
+    //     return
 
     const alpha = rescale(MAX_DISTANCE_FOR_CONNECTION, MIN_DISTANCE_FOR_MAX_ALPHA, distance)
     const color = `hsla(180, 90%, 60%, ${alpha})`
     drawLine(node2.position, node1.position, color)
 
-    if (distance < MIN_DISTANCE_FOR_MAX_ALPHA)
-        return
+    // if (distance < MIN_DISTANCE_FOR_MAX_ALPHA)
+    //     return
 
-    let nudge = displacement.normalize().times(-10 / (distance * distance))
-    node2.velocity.add(nudge)
-    node1.velocity.subtract(nudge)
+    const dv = displacement.normalize()
+    dv.multiply((G * node2.mass) / (distance * distance))
+    node1.velocity.add(dv)
 }
 
 function createNodes() {
-    for (let i = 0; i < noOfNodes; i++) {
-        let node = createNode()
-        node.position.randomize(lerp(0, width / 2, Math.random())).add(CANVAS_MIDDLE)
-        node.velocity.randomize(lerp(0.05, 0.2, Math.random()))
-        nodes.push(node)
-    }
+    // for (let i = 0; i < noOfNodes; i++) {
+    //     let node = createNode()
+    //     node.position.randomize(lerp(0, width / 2, Math.random())).add(CANVAS_MIDDLE)
+    //     node.velocity.randomize(lerp(0.05, 0.2, Math.random()))
+    //     nodes.push(node)
+    // }
+    nodes.push(createNode({ mass: 1e13, position: V(800, 700), velocity: V(0, -0.2) }))
+    nodes.push(createNode({ mass: 1e13, position: V(1050, 400), velocity: V(0, 0.2) }))
 }
 
 

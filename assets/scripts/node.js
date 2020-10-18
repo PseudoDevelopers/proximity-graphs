@@ -1,8 +1,9 @@
-function createNode() {
+function createNode({ mass = 1e1, position = V(0, 0), velocity = V(0, 0) }) {
     return {
-        radius: 5,
-        position: V(300, 200),
-        velocity: V(0.3, 0.4),
+        mass: mass,
+        radius: 20,
+        position: position,
+        velocity: velocity,
         color: 'crimson',
         move(Δt) {
             // Position = Initial position + v * Δt
