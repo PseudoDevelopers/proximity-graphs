@@ -61,17 +61,16 @@ function drawConnection(node1, node2) {
     // if (distance < MIN_DISTANCE_FOR_MAX_ALPHA)
     //     return
 
-    const dv = displacement.normalize()
-    dv.multiply((G * node2.mass) / (distance * distance))
-    node1.velocity.add(dv)
+    node1.velocity.add(acceleration(node2.mass, displacement))
 }
 
 function createNodes() {
     // for (let i = 0; i < noOfNodes; i++) {
-    //     let node = createNode()
-    //     node.position.randomize(lerp(0, width / 2, Math.random())).add(CANVAS_MIDDLE)
-    //     node.velocity.randomize(lerp(0.05, 0.2, Math.random()))
-    //     nodes.push(node)
+    //     nodes.push(createNode({
+    //         mass: 1e13,
+    //         position: V(0, 0).randomize(lerp(0, width / 2, Math.random())).add(CANVAS_MIDDLE),
+    //         velocity: V(0, 0).randomize(lerp(0.05, 0.2, Math.random()))
+    //     }))
     // }
     nodes.push(createNode({ mass: 1e13, position: V(800, 700), velocity: V(0, -0.2) }))
     nodes.push(createNode({ mass: 1e13, position: V(1050, 400), velocity: V(0, 0.2) }))
