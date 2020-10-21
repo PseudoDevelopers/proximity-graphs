@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proximity Graphs with Gravity</title>
+
+    <link rel="stylesheet" href="assets/styles/index.min.css">
+    <script defer src="assets/scripts/index.min.js"></script>
+</head>
+
+<body>
+    <!-- Canvas -->
+    <canvas id="canvas"></canvas>
+
+    <script>
+        let noOfNodes = 100
+
+        const canvas = document.getElementById('canvas')
+        let width, height
+        document.body.onresize = resizeCanvas
+        resizeCanvas()
+
+        function resizeCanvas() {
+            width = canvas.width = document.body.offsetWidth
+            height = canvas.height = document.body.offsetHeight
+        }
+
+        let lines = true
+        let gravity = true
+    </script>
+
+    <!-- Controls Panel -->
+    @@include('./components/controls-panel.html')
+</body>
+
+</html>

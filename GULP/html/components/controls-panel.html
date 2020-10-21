@@ -1,0 +1,43 @@
+<section id="controls-panel" minimized="true">
+    <script>
+        setTimeout(() => CONTROL_PANEL.show(), 2000)
+    </script>
+
+    <div class="icons">
+        <span class="minimize" title="Minimize" onclick="CONTROL_PANEL.hide()">&#128469;&#xFE0E;</span>     <!-- Minimize -->
+        <span class="maximize" title="Maximize" onclick="CONTROL_PANEL.show()">&#128470;&#xFE0E;</span>     <!-- Maximize -->
+    </div>
+
+    <script>
+        const CONTROL_PANEL = {
+            elem: document.getElementById('controls-panel'),
+            isShow()/****/ { return this.elem.getAttribute('minimized') === 'false'/**/ },
+            isHidden()/**/ { return this.elem.getAttribute('minimized') === 'true'/***/ },
+            show()/******/ { this.elem.setAttribute('minimized', 'false')/**/ },
+            hide()/******/ { this.elem.setAttribute('minimized', 'true')/***/ },
+            toggle() {
+                if (this.isShow()) this.hide()
+                else/************/ this.show()
+            }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 27)
+                CONTROL_PANEL.toggle()
+        })
+    </script>
+
+    <div id="controls">
+        <!-- Nodes -->
+        @@include('controls/nodes.html')
+
+        <!-- Nodes Nature -->
+        @@include('controls/nodes-nature.html')
+
+        <!-- Edges -->
+        @@include('controls/edges.html')
+
+        <!-- Other Options -->
+        @@include('controls/other-options.html')
+    </div>
+</section>

@@ -1,16 +1,22 @@
 {
-  "name": "proximity-graph",
-  "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-file-include": "^2.2.2",
-    "gulp-htmlmin": "^5.0.1"
-  }
+    "name": "proximity-graph",
+    "version": "1.0.0",
+    "description": "",
+    "main": "gulpfile.js",
+    "author": "",
+    "license": "ISC",
+    "scripts": {
+        "watch IndexHTML": "gulp indexHTML",
+        "watch indexScripts": "gulp indexScript"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-file-include": "^2.2.2",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-minify": "^3.1.0",
+        "gulp-minify-inline": "^1.1.0",
+        "gulp-strip-comments": "^2.5.2"
+    }
 }
